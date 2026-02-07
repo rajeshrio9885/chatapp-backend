@@ -46,7 +46,14 @@ const logIn = async (req, res) => {
 
 const logOut = async (req, res) => {
   try {
-  } catch (error) {}
+    res.clearCookie("token");
+    return res
+      .status(statusCode())
+      .json(responseUtil(null, "Logout successfully"));
+  } catch (error) {
+    console.log(error);
+    res.status(statusCode(error)).json(responseUtil(error, null));
+  }
 };
 
 const getUserInfo = async (req, res) => {
