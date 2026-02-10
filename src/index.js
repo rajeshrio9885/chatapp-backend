@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const multer = require("multer");
 const { statusCode, responseUtil } = require("./utils/appUtils");
+const contactRoute = require("./routes/contact.routes");
 const app = express();
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/contact", contactRoute);
 
 //multer config
 app.use((err, req, res, next) => {
