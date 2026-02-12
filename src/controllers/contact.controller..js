@@ -7,8 +7,13 @@ const searchUserByNm = async (req, res) => {
     const searchNm = req.body.srchTxt;
 
     const user = await User.find(
-      { fNm: { $regex: searchNm, $options: "i" } },
-      { fNm: 1, img: 1, color: 1 },
+      {
+        $and: [
+          { fNm: { $regex: searchNm, $options: "i" } },
+          { _id: { $ne: req.user._id } }, 
+        ],
+      },
+      { fNm: 1, img: 1, color: 1, email :1 },
       { lean: true },
     );
 
